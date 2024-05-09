@@ -4,6 +4,7 @@ import com.att.tdp.bisbis10.dto.RestaurantDTO;
 import com.att.tdp.bisbis10.dto.RestaurantWithDishesDTO;
 import com.att.tdp.bisbis10.model.Restaurant;
 import com.att.tdp.bisbis10.service.RestaurantService;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
@@ -37,5 +38,10 @@ public class RestaurantController {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Restaurant not found.");
         }
         return restaurantService.getRestaurantById(id);
+    }
+    @ResponseStatus(HttpStatus.CREATED)
+    @PostMapping
+    public void AddARestaurant(@Valid @RequestBody Restaurant content) {
+        restaurantService.save(content);
     }
 }

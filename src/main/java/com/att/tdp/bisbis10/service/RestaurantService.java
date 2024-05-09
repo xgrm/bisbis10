@@ -39,4 +39,8 @@ public class RestaurantService {
     public RestaurantWithDishesDTO getRestaurantById(Integer id) {
         return new RestaurantWithDishesDTO(covertToDTO(restaurantRepository.findById(id).get()),dishService.findByDishesByRestaurantId(id));
     }
+
+    public void save(Restaurant content) {
+        restaurantRepository.save(content);
+    }
 }

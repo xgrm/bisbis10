@@ -12,4 +12,6 @@ public interface DishRepository extends JpaRepository<Dish, Integer> {
     @Modifying
     @Transactional
     void deleteByRestaurantId(Integer restaurantId);
+
+    Boolean existsByIdAndRestaurantId(Integer id,Integer restaurantId);
 }

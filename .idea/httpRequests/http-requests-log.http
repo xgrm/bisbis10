@@ -1,0 +1,411 @@
+DELETE http://localhost:8080/restaurants/423423/dishes/432423
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.10)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2024-05-09T160133.404.json
+
+###
+
+DELETE http://localhost:8080/restaurants/6/dishes/432423
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.10)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2024-05-09T160128.404.json
+
+###
+
+DELETE http://localhost:8080/restaurants/6/dishes/3
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.10)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+###
+
+PUT http://localhost:8080/restaurants/6/dishes/1
+Content-Type: application/json
+Content-Length: 39
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.10)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{"description":"Great one","price": 34}
+
+<> 2024-05-09T155625.404.json
+
+###
+
+PUT http://localhost:8080/restaurants/10000/dishes/2
+Content-Type: application/json
+Content-Length: 39
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.10)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{"description":"Great one","price": 34}
+
+<> 2024-05-09T155612.404.json
+
+###
+
+PUT http://localhost:8080/restaurants/6/dishes/2
+Content-Type: application/json
+Content-Length: 38
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.10)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{"description":"Great one","ssss": 34}
+
+<> 2024-05-09T155552.404.json
+
+###
+
+PUT http://localhost:8080/restaurants/6/dishes/2
+Content-Type: application/json
+Content-Length: 39
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.10)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{"description":"Great one","price": 34}
+
+###
+
+POST http://localhost:8080/restaurants/505/dishes
+Content-Type: application/json
+Content-Length: 58
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.10)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{"name":"Shakshuka","description":"Great one","price": 34}
+
+<> 2024-05-09T153502.404.json
+
+###
+
+POST http://localhost:8080/restaurants/6/dishes
+Content-Type: application/json
+Content-Length: 58
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.10)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{"name":"Shakshuka","description":"Great one","price": 34}
+
+###
+
+POST http://localhost:8080/ratings
+Content-Type: application/json
+Content-Length: 34
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.10)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{"restaurantId": 6,
+"rating": 7.5}
+
+###
+
+POST http://localhost:8080/ratings
+Content-Type: application/json
+Content-Length: 35
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.10)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{"restaurantId": 1000,
+"rating": 8}
+
+<> 2024-05-09T152309.404.json
+
+###
+
+POST http://localhost:8080/ratings
+Content-Type: application/json
+Content-Length: 32
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.10)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{"restaurantId": 6,
+"rating": 8}
+
+###
+
+PUT http://localhost:8080/restaurants/6
+Content-Type: application/json
+Content-Length: 37
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.10)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "cuisines": [
+    "Israeli"
+  ]
+}
+
+###
+
+PUT http://localhost:8080/restaurants/5
+Content-Type: application/json
+Content-Length: 37
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.10)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "cuisines": [
+    "Israeli"
+  ]
+}
+
+<> 2024-05-09T150949.404.json
+
+###
+
+POST http://localhost:8080/order
+Content-Type: application/json
+Content-Length: 133
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.10)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "restaurantId": 6,
+  "orderItems":[
+    {"dishId":2,
+      "amount":1
+    },
+    {
+      "dishId":3,
+      "amount":1
+    }
+  ]
+}
+
+<> 2024-05-09T150943.200.txt
+
+###
+
+POST http://localhost:8080/order
+Content-Type: application/json
+Content-Length: 133
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.10)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "restaurantId": 6,
+  "orderItems":[
+    {"dishId":2,
+      "amount":1
+    },
+    {
+      "dishId":3,
+      "amount":1
+    }
+  ]
+}
+
+<> 2024-05-09T145822.200.txt
+
+###
+
+POST http://localhost:8080/order
+Content-Type: application/json
+Content-Length: 135
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.10)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "restaurantId": 6,
+  "orderItems":[
+    {"dishId":564,
+      "amount":1
+    },
+    {
+      "dishId":3,
+      "amount":1
+    }
+  ]
+}
+
+<> 2024-05-09T145807.404.json
+
+###
+
+POST http://localhost:8080/order
+Content-Type: application/json
+Content-Length: 137
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.10)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "restaurantId": 46546,
+  "orderItems":[
+    {"dishId":2,
+      "amount":1
+    },
+    {
+      "dishId":3,
+      "amount":1
+    }
+  ]
+}
+
+<> 2024-05-09T145752.404.json
+
+###
+
+POST http://localhost:8080/order
+Content-Type: application/json
+Content-Length: 133
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.10)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "restaurantId": 6,
+  "orderItems":[
+    {"dishId":2,
+      "amount":1
+    },
+    {
+      "dishId":3,
+      "amount":1
+    }
+  ]
+}
+
+<> 2024-05-09T143228.200.txt
+
+###
+
+POST http://localhost:8080/order
+Content-Type: application/json
+Content-Length: 135
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.10)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "restaurantId": 6,
+  "orderItems":[
+    {"dishId":12,
+      "amount":1
+    },
+    {
+      "dishId":14,
+      "amount":1
+    }
+  ]
+}
+
+<> 2024-05-09T143216.500.json
+
+###
+
+POST http://localhost:8080/order
+Content-Type: application/json
+Content-Length: 135
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.10)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "restaurantId": 6,
+  "orderItems":[
+    {"dishId":12,
+      "amount":1
+    },
+    {
+      "dishId":14,
+      "amount":1
+    }
+  ]
+}
+
+<> 2024-05-09T143046.500.json
+
+###
+
+DELETE http://localhost:8080/restaurants/5
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.10)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+###
+
+PUT http://localhost:8080/restaurants/5
+Content-Type: application/json
+Content-Length: 37
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.10)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "cuisines": [
+    "Israeli"
+  ]
+}
+
+###
+
+POST http://localhost:8080/restaurants
+Content-Type: application/json
+Content-Length: 85
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.10)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "name": "SAAR",
+  "isKosher": false,
+  "cuisines": ["Asian","Mexican","Indian"]
+}
+
+###
+
+DELETE http://localhost:8080/restaurants/4
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.10)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+###
+
+PUT http://localhost:8080/restaurants/4
+Content-Type: application/json
+Content-Length: 37
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.10)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "cuisines": [
+    "Israeli"
+  ]
+}
+
+###
+
+POST http://localhost:8080/restaurants
+Content-Type: application/json
+Content-Length: 86
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.10)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "name": "Taizu",
+  "isKosher": false,
+  "cuisines": ["Asian","Mexican","Indian"]
+}
+
+###
+

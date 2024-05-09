@@ -67,4 +67,10 @@ public class DishService {
 
         this.save(existingDish);
     }
+    @Modifying
+    public void delete(Integer restaurantId, Integer dishId) {
+        Dish existingDish = dishRepository.getDishByIdAndRestaurantId(dishId,restaurantId);
+        existingDish.setDeleted(true);
+        dishRepository.save(existingDish);
+    }
 }

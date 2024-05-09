@@ -40,4 +40,12 @@ public class DishController {
         }
 
     }
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @DeleteMapping("/{restaurant_id}/dishes/{dishId}")
+    public void delete(@PathVariable Integer restaurant_id,@PathVariable Integer dishId){
+        if(!dishService.existsByIdAndRestaurantId(dishId,restaurant_id)) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Dish not found.");
+        }
+        dishService.delete(restaurant_id,dishId);
+    }
 }

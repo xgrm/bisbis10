@@ -21,10 +21,12 @@ public class DishService {
         return dishRepository.findByRestaurantIdAndIsDeleted(id,false).stream()
                 .map(dish -> new DishDTO(dish)).collect(Collectors.toList());
     }
-
     @Modifying
     @Transactional
     public void deleteByRestaurantId(Integer id) {
         dishRepository.deleteByRestaurantId(id);
+    }
+    public Boolean existsByIdAndRestaurantId(Integer id, Integer restaurantId){
+        return dishRepository.existsByIdAndRestaurantId(id,restaurantId);
     }
 }

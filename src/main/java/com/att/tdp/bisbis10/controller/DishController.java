@@ -7,6 +7,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.Map;
+
 @RestController
 @RequestMapping("/restaurants")
 public class DishController {
@@ -15,6 +17,7 @@ public class DishController {
     public DishController(DishService dishService) {
         this.dishService = dishService;
     }
+
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("/{restaurant_id}/dishes")
     public void addADish(@PathVariable Integer restaurant_id, @Valid @RequestBody Dish content) {
@@ -23,5 +26,18 @@ public class DishController {
         }
         content.setRestaurantId(restaurant_id);
         dishService.save(content);
+    }
+    @ResponseStatus(HttpStatus.OK)
+    @PutMapping("/{restaurant_id}/dishes/{dishId}")
+    public void update(@RequestBody Map<String, Object> updates, @PathVariable Integer restaurant_id, @PathVariable Integer dishId) {
+        if(!dishService.existsByIdAndRestaurantId(dishId,restaurant_id) ) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Dish not found.");
+        }
+        try {
+            dishService.update(updates, dishId,restaurant_id);
+        }catch (IllegalArgumentException e){
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getMessage());
+        }
+
     }
 }

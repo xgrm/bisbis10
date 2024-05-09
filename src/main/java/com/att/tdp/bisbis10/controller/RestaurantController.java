@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/restaurants")
@@ -41,7 +42,19 @@ public class RestaurantController {
     }
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
-    public void AddARestaurant(@Valid @RequestBody Restaurant content) {
+    public void addARestaurant(@Valid @RequestBody Restaurant content) {
         restaurantService.save(content);
+    }
+
+    @ResponseStatus(HttpStatus.OK)
+    @PutMapping("/{id}")
+    public void updateARestaurant(@RequestBody Map<String, Object> updates, @PathVariable Integer id) {
+        Restaurant existingRestaurant = restaurantService.findById(id)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Restaurant not found."));
+        try {
+            restaurantService.update(updates, existingRestaurant);
+        }catch (IllegalArgumentException e){
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
+        }
     }
 }

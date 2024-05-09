@@ -31,7 +31,6 @@ public class RestaurantController {
     public List<RestaurantDTO> getRestaurantsByCuisine(@RequestParam("cuisine") String cuisine) {
         return restaurantService.GetRestaurantsByCuisine(cuisine);
     }
-
     @ResponseStatus(HttpStatus.OK)
     @GetMapping("/{id}")
     public RestaurantWithDishesDTO getRestaurant(@PathVariable Integer id) {
@@ -45,7 +44,6 @@ public class RestaurantController {
     public void addARestaurant(@Valid @RequestBody Restaurant content) {
         restaurantService.save(content);
     }
-
     @ResponseStatus(HttpStatus.OK)
     @PutMapping("/{id}")
     public void updateARestaurant(@RequestBody Map<String, Object> updates, @PathVariable Integer id) {
@@ -56,5 +54,13 @@ public class RestaurantController {
         }catch (IllegalArgumentException e){
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
         }
+    }
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @DeleteMapping("/{id}")
+    public void delete(@PathVariable Integer id) {
+        if (!restaurantService.existsById(id)) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Restaurant not found.");
+        }
+        restaurantService.deleteById(id);
     }
 }

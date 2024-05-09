@@ -20,7 +20,7 @@ public class OrderItem {
     private Integer id;
 
     @Column(name = "order_id", nullable = false)
-    private UUID order_id;
+    private UUID orderId;
 
     @Column(name = "dish_id", nullable = false)
     private Integer dish_id;

@@ -2,9 +2,10 @@ package com.att.tdp.bisbis10.service;
 
 import com.att.tdp.bisbis10.dto.RestaurantDTO;
 import com.att.tdp.bisbis10.dto.RestaurantWithDishesDTO;
-import com.att.tdp.bisbis10.model.Dish;
 import com.att.tdp.bisbis10.model.Restaurant;
 import com.att.tdp.bisbis10.repository.RestaurantRepository;
+import jakarta.transaction.Transactional;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,16 +18,17 @@ public class RestaurantService {
     private final RestaurantRepository restaurantRepository;
     private final RatingService ratingService;
     private final DishService dishService;
-    public RestaurantService(RestaurantRepository restaurantRepository, RatingService ratingService, DishService dishService) {
+    private final OrderService orderService;
+    public RestaurantService(RestaurantRepository restaurantRepository, RatingService ratingService, DishService dishService, OrderService orderService) {
         this.restaurantRepository = restaurantRepository;
         this.ratingService = ratingService;
         this.dishService = dishService;
+        this.orderService = orderService;
     }
 
     public List<RestaurantDTO> findAll() {
         return restaurantRepository.findAll().stream().map(restaurant ->covertToDTO(restaurant)).collect(Collectors.toList());
     }
-
     public List<RestaurantDTO> GetRestaurantsByCuisine(String cuisine) {
         return restaurantRepository.findByCuisine(cuisine).stream().map(restaurant ->covertToDTO(restaurant)).collect(Collectors.toList());
     }
@@ -43,11 +45,10 @@ public class RestaurantService {
     public void save(Restaurant content) {
         restaurantRepository.save(content);
     }
-
     public Optional<Restaurant> findById(Integer id) {
         return restaurantRepository.findById(id);
     }
-
+    @Modifying
     public void update(Map<String, Object> updates, Restaurant existingRestaurant) throws IllegalArgumentException{
         updates.forEach((key, value) -> {
             switch (key) {
@@ -80,5 +81,13 @@ public class RestaurantService {
         });
 
         this.save(existingRestaurant);
+    }
+    @Modifying
+    @Transactional
+    public void deleteById(Integer id) {
+        ratingService.deleteByRestaurantId(id);
+        orderService.deleteByRestaurantId(id);
+        dishService.deleteByRestaurantId(id);
+        restaurantRepository.deleteById(id);
     }
 }

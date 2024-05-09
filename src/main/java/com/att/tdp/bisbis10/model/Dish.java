@@ -18,7 +18,7 @@ public class Dish {
     private Integer id;
 
     @Column(name="restaurant_id", nullable = false)
-    private Integer restaurant;
+    private Integer restaurantId;
 
     @Column(nullable = false)
     private String name;
@@ -28,6 +28,7 @@ public class Dish {
 
     @Column(nullable = false)
     private double price;
+
     @Column(name = "is_deleted",nullable = false)
     private boolean isDeleted;
 }

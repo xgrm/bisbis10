@@ -18,7 +18,16 @@ public class RestaurantDTO {
         this.setId(restaurant.getId());
         this.setName(restaurant.getName());
         this.setAverageRating(restaurant.getAverageRating());
-        this.setKosher(restaurant.isKosher());
+
+        this.setIsKosher(restaurant.isKosher());
         this.setCuisines(restaurant.getCuisines());
+    }
+
+    public boolean getIsKosher() {
+        return isKosher;
+    }
+
+    public void setIsKosher(boolean kosher) {
+        isKosher = kosher;
     }
 }

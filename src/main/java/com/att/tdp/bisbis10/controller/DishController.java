@@ -1,5 +1,6 @@
 package com.att.tdp.bisbis10.controller;
 
+import com.att.tdp.bisbis10.dto.DishDTO;
 import com.att.tdp.bisbis10.model.Dish;
 import com.att.tdp.bisbis10.service.DishService;
 import jakarta.validation.Valid;
@@ -7,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -47,5 +49,14 @@ public class DishController {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Dish not found.");
         }
         dishService.delete(restaurant_id,dishId);
+    }
+
+    @ResponseStatus(HttpStatus.OK)
+    @GetMapping("/{restaurant_id}/dishes")
+    public List<DishDTO> getDishesByRestaurant(@PathVariable Integer restaurant_id){
+        if(!dishService.existsRestaurantById(restaurant_id)) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Restaurant not found.");
+        }
+        return dishService.findByDishesByRestaurantId(restaurant_id);
     }
 }

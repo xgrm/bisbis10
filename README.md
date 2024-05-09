@@ -51,4 +51,4 @@ This system is developed using Java Spring Boot.PostgreSQL is used as the databa
 
 ## Database Schema
 
-![Database Schema](images/Database Schema.png)
+![Database Schema]("images/Database Schema.png")

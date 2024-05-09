@@ -24,6 +24,7 @@ public class Restaurant {
 
     @Transient
     private Double averageRating;
+
     @Column(name = "is_kosher",nullable = false)
     private boolean isKosher;
 

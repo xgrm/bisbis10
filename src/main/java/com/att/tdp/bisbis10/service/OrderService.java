@@ -33,9 +33,7 @@ public class OrderService {
         });
     }
     public UUID save(OrderDTO content) {
-        Order order = new Order();
-        order.setRestaurant(content.getRestaurantId());
-        order = orderRepository.save(order);
+        Order order = orderRepository.save(new Order().builder().restaurant(content.getRestaurantId()).build());
         orderItemService.saveOrderItems(content.getOrderItems(),order.getId());
         return  order.getId();
     }

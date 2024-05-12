@@ -4,11 +4,14 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import net.minidev.json.JSONObject;
+import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestMethodOrder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.test.web.server.LocalServerPort;
+import org.springframework.core.annotation.Order;
 import org.springframework.http.*;
 
 import java.util.*;
@@ -17,6 +20,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class RestaurantManagementSystemTests {
 
 	@LocalServerPort
@@ -56,15 +60,18 @@ class RestaurantManagementSystemTests {
 			assertTrue( mapDish.containsKey("price"));
 		}
 	}
-	private Map<String, Object> getFirstRestaurant(){
+	private Map<String, Object> getFirstRestaurant(boolean first){
 		ResponseEntity<String> response = restTemplate.getForEntity(getBaseUrl() + "/restaurants", String.class);
 		List<Map<String, Object>> restaurants = null;
 		try {
 			restaurants = objectMapper.readValue(response.getBody(), new TypeReference<List<Map<String, Object>>>() {});
-			return restaurants.get(0);
+			return restaurants.get(first ? 0: (restaurants.size()>1?restaurants.size()-1:0));
 		} catch (JsonProcessingException e) {
 			throw new RuntimeException(e);
 		}
+	}
+	private Map<String, Object> getFirstRestaurant(){
+		return getFirstRestaurant(true);
 	}
 	private Map<String, Object> getRestaurantById(String id){
 		String restaurantId = id;
@@ -109,6 +116,7 @@ class RestaurantManagementSystemTests {
 
 		ResponseEntity<String> response = restTemplate.postForEntity("/restaurants", requestEntity, String.class);
 		assertEquals(HttpStatus.CREATED, response.getStatusCode());
+		restTemplate.postForEntity("/restaurants", requestEntity, String.class);
 	}
 
 	@Test
@@ -194,8 +202,9 @@ class RestaurantManagementSystemTests {
 	}
 
 	@Test
+
 	void testAddDish() {
-		String restaurantId = getFirstRestaurant().get("id").toString();
+		String restaurantId = getFirstRestaurant(false).get("id").toString();
 		JSONObject requestBody = new JSONObject();
 		requestBody.put("name", "New Dish");
 		requestBody.put("description", "Delicious new dish");
@@ -208,6 +217,7 @@ class RestaurantManagementSystemTests {
 	}
 
 	@Test
+
 	void testUpdateDish() {
 		Map<String, Object> dish = getFirstDish().orElse(getFirstDish().orElseThrow());
 		String restaurantId = dish.get("restaurantId").toString();
@@ -231,6 +241,7 @@ class RestaurantManagementSystemTests {
 	}
 
 	@Test
+	@Order(10)
 	void testGetDishesByRestaurant() {
 		Map<String, Object> dish = getFirstDish().orElse(getFirstDish().orElseThrow());
 		String restaurantId = dish.get("restaurantId").toString();
@@ -246,6 +257,7 @@ class RestaurantManagementSystemTests {
 	}
 
 	@Test
+
 	void testPlaceOrder() {
 		Map<String, Object> dish = getFirstDish().orElse(getFirstDish().orElseThrow());
 		String restaurantId = dish.get("restaurantId").toString();
@@ -278,7 +290,9 @@ class RestaurantManagementSystemTests {
 		}
 	}
 
+
 	@Test
+	@Order(11)
 	void testDeleteDish() {
 		Map<String, Object> dish = getFirstDish().orElse(getFirstDish().orElseThrow());
 		String restaurantId = dish.get("restaurantId").toString();
@@ -295,7 +309,7 @@ class RestaurantManagementSystemTests {
 		);
 		assertEquals(HttpStatus.NO_CONTENT, response.getStatusCode());
 	}
-
+	@Order(12)
 	@Test
 	void testDeleteRestaurant() {
 		String restaurantId = getFirstRestaurant().get("id").toString();
